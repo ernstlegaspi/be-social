@@ -2,26 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+* { margin: 0 }
+
+html,
+body,
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+	width: 100%;
+	height: 100%
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+@layer utilities {
+	.card {
+		@apply bg-white rounded
+	}
+
+	.ebold-40 {
+		@apply text-dark text-40 font-extrabold
+	}
+
+	.f-center {
+		@apply flex justify-center items-center
+	}
+
+	.h-bet {
+		@apply flex justify-between
+	}
+
+	.h-center {
+		@apply flex justify-center
+	}
+
+	.input {
+		@apply w-full outline-none p-2 border-b border-dark
+	}
+
+	.v-center {
+		@apply flex items-center
+	}
+
+	.pointer {
+		@apply cursor-pointer
+	}
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.shadow {
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.3)
 }
