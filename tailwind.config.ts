@@ -25,8 +25,15 @@ module.exports = {
 			"40": "40px"
 		},
 		colors: {
-			dark: "#1d1d1d",
-			
+			dark: "#2E2E2E",
+			vio: "#afa6b7",
+			ind: "#6c40d9",
+			lg: "#F3F3F3",
+
+
+
+
+
 			border: "hsl(var(--border))",
 			input: "hsl(var(--input))",
 			ring: "hsl(var(--ring))",

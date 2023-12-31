@@ -13,7 +13,7 @@ body,
 
 @layer utilities {
 	.card {
-		@apply bg-white rounded
+		@apply bg-white rounded-[5px]
 	}
 
 	.ebold-40 {
@@ -45,6 +45,23 @@ body,
 	}
 }
 
-.shadow {
+.sshadow {
 	box-shadow: 0 0 6px rgba(0, 0, 0, 0.3)
 }
+
+.vio-shadow {
+	box-shadow: 0 0 10px rgba(175, 166, 183, .5)
+}
+
+::-webkit-scrollbar {
+	width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #afa6b7
+}
+
+::-webkit-scrollbar-track {
+	background: transparent
+}
+

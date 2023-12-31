@@ -36,8 +36,6 @@ export default function SignInForm({ setIsSignIn }: { setIsSignIn: React.Dispatc
 		try {
 			const res = await signIn("credentials", { ...data, redirect: false })
 
-			console.log(res)
-			
 			if(res?.status === 401) {
 				toast.error("User is not existing")
 				setIsLoading(false)

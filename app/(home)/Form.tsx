@@ -13,7 +13,7 @@ export default function Form() {
 	const [isSignIn, setIsSignIn] = useState(true)
 
 	return <div className="w-[80%] mx-auto h-full relative">
-		<h1 className="ebold-40 text-center my-10">BeSocial</h1>
+		<h1 className="ebold-40 text-center my-10">Huddle</h1>
 		{isSignIn ? <SignInForm setIsSignIn={setIsSignIn} /> : <SignUpForm setIsSignIn={setIsSignIn} />}
 		<div className="h-[1px] w-full bg-dark mt-6"></div>
 		<div className="bg-white absolute z-10 mt-[-15px] left-[50%] translate-x-[-50%] px-2 rounded-full">or</div>
