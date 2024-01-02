@@ -1,23 +1,16 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
-import { FaFacebookF, FaGoogle } from "react-icons/fa"
 
-import BlackButton from '@/components/BlackButton'
+import useIsInterests from '@/hooks/useIsInterests'
 
-const SignInForm = dynamic(() => import('./SignInForm'))
-const SignUpForm = dynamic(() => import('./SignUpForm'))
+const AuthForm = dynamic(() => import("./AuthForm"))
+const Interests = dynamic(() => import("./Interests"))
 
 export default function Form() {
-	const [isSignIn, setIsSignIn] = useState(true)
+	const { isInterests } = useIsInterests()
 
-	return <div className="w-[80%] mx-auto h-full relative">
-		<h1 className="ebold-40 text-center my-10">Huddle</h1>
-		{isSignIn ? <SignInForm setIsSignIn={setIsSignIn} /> : <SignUpForm setIsSignIn={setIsSignIn} />}
-		<div className="h-[1px] w-full bg-dark mt-6"></div>
-		<div className="bg-white absolute z-10 mt-[-15px] left-[50%] translate-x-[-50%] px-2 rounded-full">or</div>
-		<BlackButton extraClass='mt-6' icon={FaGoogle} iconSize={18} label={isSignIn ? "Sign in with Google" : "Sign up with Google"} onClick={() => {}} />
-		<BlackButton extraClass='mt-3' icon={FaFacebookF} iconSize={18} label={isSignIn ? "Sign in with Facebook" : "Sign up with Facebook"} onClick={() => {}} />
+	return <div className="w-full h-full">
+		{isInterests ? <Interests /> : <AuthForm />}
 	</div>
 }

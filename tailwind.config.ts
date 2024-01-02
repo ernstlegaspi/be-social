@@ -27,6 +27,7 @@ module.exports = {
 		colors: {
 			dark: "#2E2E2E",
 			vio: "#afa6b7",
+			dvio: "#9C90A8",
 			ind: "#6c40d9",
 			lg: "#F3F3F3",
 

@@ -11,98 +11,98 @@ export default async function FriendsBar() {
 		<div className="bg-white h-full w-[18%] fixed">
 			<p className="text-vio font-bold tracking-widest my-3 ml-4">FRIENDS</p>
 			<div className="mx-4">
-				<div className="v-center justify-between mb-5">
+				<div className="v-center-bet mb-5">
 					<div className="v-center">
 						<ProfilePicture picture={user?.picture as string} />
 						<p className="ml-3">Ernst Legaspi</p>
 					</div>
 					<p className="text-green-500">Online</p>
 				</div>
-				<div className="v-center justify-between mb-5">
+				<div className="v-center-bet mb-5">
 					<div className="v-center">
 						<ProfilePicture picture={user?.picture as string} />
 						<p className="ml-3">Ernst Legaspi</p>
 					</div>
 					<p className="text-green-500">Online</p>
 				</div>
-				<div className="v-center justify-between mb-5">
+				<div className="v-center-bet mb-5">
 					<div className="v-center">
 						<ProfilePicture picture={user?.picture as string} />
 						<p className="ml-3">Ernst Legaspi</p>
 					</div>
 					<p className="text-green-500">Online</p>
 				</div>
-				<div className="v-center justify-between mb-5">
+				<div className="v-center-bet mb-5">
 					<div className="v-center">
 						<ProfilePicture picture={user?.picture as string} />
 						<p className="ml-3">Ernst Legaspi</p>
 					</div>
 					<p className="text-green-500">Online</p>
 				</div>
-				<div className="v-center justify-between mb-5">
+				<div className="v-center-bet mb-5">
 					<div className="v-center">
 						<ProfilePicture picture={user?.picture as string} />
 						<p className="ml-3">Ernst Legaspi</p>
 					</div>
 					<p className="text-green-500">Online</p>
 				</div>
-				<div className="v-center justify-between mb-5">
+				<div className="v-center-bet mb-5">
 					<div className="v-center">
 						<ProfilePicture picture={user?.picture as string} />
 						<p className="ml-3">Ernst Legaspi</p>
 					</div>
 					<p className="text-green-500">Online</p>
 				</div>
-				<div className="v-center justify-between mb-5">
+				<div className="v-center-bet mb-5">
 					<div className="v-center">
 						<ProfilePicture picture={user?.picture as string} />
 						<p className="ml-3">Ernst Legaspi</p>
 					</div>
 					<p className="text-green-500">Online</p>
 				</div>
-				<div className="v-center justify-between mb-5">
+				<div className="v-center-bet mb-5">
 					<div className="v-center">
 						<ProfilePicture picture={user?.picture as string} />
 						<p className="ml-3">Ernst Legaspi</p>
 					</div>
 					<p className="text-green-500">Online</p>
 				</div>
-				<div className="v-center justify-between mb-5">
+				<div className="v-center-bet mb-5">
 					<div className="v-center">
 						<ProfilePicture picture={user?.picture as string} />
 						<p className="ml-3">Ernst Legaspi</p>
 					</div>
 					<p className="text-green-500">Online</p>
 				</div>
-				<div className="v-center justify-between mb-5">
+				<div className="v-center-bet mb-5">
 					<div className="v-center">
 						<ProfilePicture picture={user?.picture as string} />
 						<p className="ml-3">Ernst Legaspi</p>
 					</div>
 					<p className="text-green-500">Online</p>
 				</div>
-				<div className="v-center justify-between mb-5">
+				<div className="v-center-bet mb-5">
 					<div className="v-center">
 						<ProfilePicture picture={user?.picture as string} />
 						<p className="ml-3">Ernst Legaspi</p>
 					</div>
 					<p className="text-green-500">Online</p>
 				</div>
-				<div className="v-center justify-between mb-5">
+				<div className="v-center-bet mb-5">
 					<div className="v-center">
 						<ProfilePicture picture={user?.picture as string} />
 						<p className="ml-3">Ernst Legaspi</p>
 					</div>
 					<p className="text-green-500">Online</p>
 				</div>
-				<div className="v-center justify-between mb-5">
+				<div className="v-center-bet mb-5">
 					<div className="v-center">
 						<ProfilePicture picture={user?.picture as string} />
 						<p className="ml-3">Ernst Legaspi</p>
 					</div>
 					<p className="text-green-500">Online</p>
 				</div>
-				<div className="v-center justify-between mb-5">
+				<div className="v-center-bet mb-5">
 					<div className="v-center">
 						<ProfilePicture picture={user?.picture as string} />
 						<p className="ml-3">Ernst Legaspi</p>

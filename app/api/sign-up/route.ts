@@ -7,9 +7,9 @@ export async function POST(req: Request) {
 	try {
 		const body = await req.json()
 
-		const { email, name, password } = body
+		const { email, interests, name, password } = body
 
-		if(!email || !name || !password) return res(400)
+		if(!email || !interests || !name || !password) return res(400)
 
 		const user = await prisma.user.findUnique({
 			where: {

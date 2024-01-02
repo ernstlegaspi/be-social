@@ -14,6 +14,7 @@ model User {
 	password String
 	userName String
 	picture String?
+	interests String[]
 	createdAt DateTime @default(now())
 	updatedAt DateTime @updatedAt
 
@@ -23,6 +24,29 @@ model User {
 model Post {
 	id String @id @default(auto()) @map("_id") @db.ObjectId
 
+	body String
+	picture String
+	name String
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+
 	userId String @db.ObjectId
 	user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+	likes Likes[]
+	comments Comments[]
+}
+
+model Likes {
+	id String @id @default(auto()) @map("_id") @db.ObjectId
+
+	postId String @db.ObjectId
+	post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+model Comments {
+	id String @id @default(auto()) @map("_id") @db.ObjectId
+
+	postId String @db.ObjectId
+	post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 }

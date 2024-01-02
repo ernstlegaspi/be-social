@@ -10,11 +10,13 @@ import SessionProvider from '@/lib/providers/SessionProvider'
 
 import { getServerSession } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]/route'
+import getUser from '@/actions/getUser'
 
 const inter = Inter({ subsets: ['latin'] })
 
 const FriendsBar = dynamic(() => import('@/components/friendsbar/FriendsBar'))
 const LeftSidebar = dynamic(() => import('@/components/leftsidebar/LeftSidebar'))
+const Modals = dynamic(() => import('@/components/modals/Modals'))
 const Navbar = dynamic(() => import('@/components/navbar/Navbar'))
 const RightTabs = dynamic(() => import('@/components/righttabs/RightTabs'))
 
@@ -25,12 +27,15 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
 	const session = await getServerSession(authOptions)
+	let user = null
+
+	if(session) user = await getUser(session?.user?.email as string)
 
 	return (
 		<SessionProvider>
 			<QueryProvider>
 				<html lang="en">
-					<body className={`${inter.className} ${session ? 'bg-lg' : ''}`}>
+					<body className={`${inter.className} ${session ? 'bg-lg' : 'bg-vio'}`}>
 						<Toaster />
 						<div className="max-w-[1920px] mx-auto h-[100vh] flex flex-col">
 							{session ? <Navbar /> : null}
@@ -39,9 +44,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 								{children}
 								<RightTabs />
 								<FriendsBar />
-								<div className="h-[400vh]"></div>
 							</div>}
 						</div>
+						<Modals user={user as User} />
 					</body>
 				</html>
 			</QueryProvider>

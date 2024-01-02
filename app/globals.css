@@ -40,8 +40,16 @@ body,
 		@apply flex items-center
 	}
 
+	.v-center-bet {
+		@apply flex items-center justify-between
+	}
+
 	.pointer {
 		@apply cursor-pointer
+	}
+
+	.sub-label {
+		@apply font-medium text-vio px-4 pb-[9px]
 	}
 }
 
