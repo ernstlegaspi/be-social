@@ -8,3 +8,13 @@ type User = {
 	createdAt: Date
 	updatedAt: Date
 }
+
+type Post = {
+	createdAt?: Date
+	body: string
+	id?: string
+	interests: string[]
+	name: string
+	picture: string
+	userId: string
+}

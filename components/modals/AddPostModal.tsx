@@ -25,22 +25,24 @@ export default function AddPostModal({ user }: { user: User }) {
 	const queryClient = useQueryClient()
 
 	const { isPending, mutate } = useMutation({
-		mutationFn: async (newPost: any) => {
-			return axios.post('/api/post', { body: newPost?.body, name: user?.name, userId: user?.id, picture: '' })
+		mutationFn: async (newPost: Post) => {
+			return axios.post('/api/post', newPost)
 		},
 		onError: (error, variables, context) => {
 			toast.error("Has an error")
 			console.log(error)
 		},
-		onMutate: async newPost => {
-			const posts = queryClient.getQueryData(['posts']) as any
+		onMutate: async (newPost: Post) => {
+			await queryClient.cancelQueries({ queryKey: ['todos'] })
+
+			const posts = queryClient.getQueryData(['posts']) as Post[]
 			queryClient.setQueryData(['posts'], [...posts, newPost])
 
-			queryClient.invalidateQueries({ queryKey: ['posts'], exact: true })
 
-			// return posts
+			return { posts }
 		},
 		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['posts'], exact: true })
 			toast.success('Post added to feed!')
 			setDisabled(true)
 			setData({ body: '' })
@@ -54,7 +56,16 @@ export default function AddPostModal({ user }: { user: User }) {
 
 	const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		mutate(data)
+		
+		const picture = !user?.picture ? '' : user?.picture as string
+		
+		mutate({
+			interests: user?.interests,
+			body: data.body,
+			name: user?.name,
+			picture,
+			userId: user?.id
+		})
 	}
 
 	return <div onClick={handleClick} className="f-center inset-0 bg-dark/50 fixed z-40">

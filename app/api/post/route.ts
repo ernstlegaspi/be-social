@@ -6,19 +6,15 @@ export async function POST(req: Request) {
 	try {
 		const _body = await req.json()
 
-		const { body, name, picture, userId } = _body
+		const { body, interests, name, picture, userId } = _body
 
-		if(!body || !name || !userId) return res(400)
+		if(!body || !interests || interests.length < 1 || !name || !userId) return res(400)
 
 		await prisma.post.create({
 			data: {
-				body,
-				name,
-				picture,
-				userId
+				..._body
 			}
 		})
-		console.log(66)
 
 		return res(201)
 	}
