@@ -24,7 +24,8 @@ model User {
 	followers User[] @relation("UserFollows", fields: [followersIDs], references: [id])
 	following User[] @relation("UserFollows", fields: [followingIDs], references: [id])
 
-	post Post[]
+	likedPost Post[] @relation("LikedPosts")
+	post Post[] @relation("UserPost")
 }
 
 model Post {
@@ -34,26 +35,13 @@ model Post {
 	picture String
 	name String
 	interests String[]
+	likers String[] @db.ObjectId
 	createdAt DateTime @default(now())
 	updatedAt DateTime @updatedAt
 
+	likedUserId String? @db.ObjectId
+	liker User? @relation("LikedPosts", fields: [likedUserId], references: [id], onDelete: Cascade)
+
 	userId String @db.ObjectId
-	user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-	likes Likes[]
-	comments Comments[]
-}
-
-model Likes {
-	id String @id @default(auto()) @map("_id") @db.ObjectId
-
-	postId String @db.ObjectId
-	post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
-}
-
-model Comments {
-	id String @id @default(auto()) @map("_id") @db.ObjectId
-
-	postId String @db.ObjectId
-	post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+	user User @relation("UserPost", fields: [userId], references: [id], onDelete: Cascade)
 }

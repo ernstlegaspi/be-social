@@ -16,6 +16,8 @@ type Post = {
 	body: string
 	id?: string
 	interests: string[]
+	likers: string[]
+	likedUserId: string
 	name: string
 	picture: string
 	userId: string

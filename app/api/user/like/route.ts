@@ -5,25 +5,21 @@ export async function PUT(req: Request) {
 	try {
 		const body = await req.json()
 
-		const { otherUserId, userId } = body
+		const { postId, userId } = body
 
-		if(!otherUserId || !userId) return res(400)
-
-		await prisma.user.update({
+		await prisma.post.update({
 			where: {
-				id: userId
+				id: postId
 			},
 			data: {
-				followingIDs: {
-					push: otherUserId
+				likedUserId: userId,
+				likers: {
+					push: userId
 				}
-			},
-			select: {
-				following: true
 			}
 		})
 
-		return res(201)
+		return res(200)
 	}
 	catch(e) {
 		return res(500)

@@ -8,13 +8,11 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import getUser from "@/actions/getUser"
 import getPostsPerInterests from "@/actions/getPostsPerInterests"
-import getFollowingPosts from "@/actions/getFollowingPosts"
 
 export default async function HomePage() {
 	const session = await getServerSession(authOptions)
 	const user = await getUser(session?.user?.email as string)
 	const queryClient = getQueryClient()
-	await getFollowingPosts(user?.id)
 
 	await queryClient.prefetchQuery({
 		queryKey: ['posts'],
