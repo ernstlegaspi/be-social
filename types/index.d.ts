@@ -1,6 +1,8 @@
 type User = {
 	id: string
 	email: string
+	followersIDs: string[]
+	followingIDs: string[]
 	name: string
 	interests: string[]
 	userName: string

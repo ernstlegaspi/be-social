@@ -8,11 +8,13 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import getUser from "@/actions/getUser"
 import getPostsPerInterests from "@/actions/getPostsPerInterests"
+import getFollowingPosts from "@/actions/getFollowingPosts"
 
 export default async function HomePage() {
 	const session = await getServerSession(authOptions)
 	const user = await getUser(session?.user?.email as string)
 	const queryClient = getQueryClient()
+	await getFollowingPosts(user?.id)
 
 	await queryClient.prefetchQuery({
 		queryKey: ['posts'],
@@ -25,7 +27,7 @@ export default async function HomePage() {
 	return <div className="h-full w-[40%] mt-[94px] relative z-10">
 		<div className="h-full w-full py-6 pl-3 pr-6 relative">
 			<Stories />
-			<Filters />
+			<Filters user={user} />
 			<HydrationBoundary state={dehydrate(queryClient)}>
 				<Feeds user={user} />
 			</HydrationBoundary>

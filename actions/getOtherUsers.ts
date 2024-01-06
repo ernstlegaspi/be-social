@@ -2,7 +2,7 @@
 
 import prisma from '@/lib/db'
 
-export default async function getOtherUser(currentUserId: string, interests: string[]) {
+export default async function getOtherUser(currentUserId: string, currentUserFollowing: string[], interests: string[]) {
 	try {
 		const otherUsers = await prisma.user.findMany({
 			where: {
@@ -21,7 +21,7 @@ export default async function getOtherUser(currentUserId: string, interests: str
 			}
 		})
 
-		return otherUsers
+		return otherUsers.filter(otherUser => !currentUserFollowing.includes(otherUser?.id))
 	}
 	catch(e) {
 		throw new Error("Internal Server Error")

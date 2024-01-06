@@ -10,17 +10,21 @@ datasource db {
 model User {
 	id String @id @default(auto()) @map("_id") @db.ObjectId
 	email String @unique
+	interests String[]
 	name String
 	password String
 	userName String
 	picture String?
-	interests String[]
 	createdAt DateTime @default(now())
 	updatedAt DateTime @updatedAt
 
+	followersIDs String[] @db.ObjectId
+	followingIDs  String[] @db.ObjectId
+
+	followers User[] @relation("UserFollows", fields: [followersIDs], references: [id])
+	following User[] @relation("UserFollows", fields: [followingIDs], references: [id])
+
 	post Post[]
-	followers Followers[]
-	following Following[]
 }
 
 model Post {
@@ -38,22 +42,6 @@ model Post {
 
 	likes Likes[]
 	comments Comments[]
-}
-
-model Following {
-	id String @id @default(auto()) @map("_id") @db.ObjectId
-
-	otherUserId String[] @db.ObjectId
-
-	userId String @db.ObjectId
-	user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model Followers {
-	id String @id @default(auto()) @map("_id") @db.ObjectId
-
-	userId String @db.ObjectId
-	user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Likes {

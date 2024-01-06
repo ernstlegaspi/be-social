@@ -12,13 +12,14 @@ export default async function getPostsPerInterests(userId: string, interests: st
 				interests: {
 					hasSome: interests
 				}
+			},
+			orderBy: {
+				createdAt: 'desc'
 			}
 		})
 
 		delete (posts as any)?.updatedAt
 
-		console.log(posts)
-		
 		return posts as Post[]
 	}
 	catch(e) {

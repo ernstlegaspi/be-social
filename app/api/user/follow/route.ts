@@ -9,10 +9,17 @@ export async function POST(req: Request) {
 
 		if(!otherUserId || !userId) return res(400)
 
-		await prisma.following.create({
+		await prisma.user.update({
+			where: {
+				id: userId
+			},
 			data: {
-				otherUserId,
-				userId
+				followingIDs: {
+					push: otherUserId
+				}
+			},
+			select: {
+				following: true
 			}
 		})
 
