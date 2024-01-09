@@ -3,24 +3,18 @@
 import axios from "axios"
 import toast from "react-hot-toast"
 import { ChangeEvent, useState } from "react"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { CgClose } from "react-icons/cg"
 import { IoImageOutline } from "react-icons/io5"
 
-import useAddPostModal from "@/hooks/useAddPostModal"
+import { useAddPostModal } from "@/hooks/useToggleModal"
 import HoverableIcon from "../HoverableIcon"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 export default function AddPostModal({ user }: { user: User }) {
-	const [whiteHovered, setWhiteHovered] = useState(false)
 	const [data, setData] = useState({ body: '' })
 	const [disabled, setDisabled] = useState(true)
-	const { close } = useAddPostModal()
-
-	const handleClick = () => {
-		if(whiteHovered) return
-
-		close()
-	}
+	const [whiteHovered, setWhiteHovered] = useState(false)
+	const { isOpen, close } = useAddPostModal()
 
 	const queryClient = useQueryClient()
 
@@ -29,15 +23,14 @@ export default function AddPostModal({ user }: { user: User }) {
 			return axios.post('/api/post', newPost)
 		},
 		onError: (error, variables, context) => {
-			toast.error("Has an error")
-			console.log(error)
+			toast.error("Can not add post. Try again later.")
+			queryClient.setQueryData(['posts'], context?.posts)
 		},
 		onMutate: async (newPost: Post) => {
 			await queryClient.cancelQueries({ queryKey: ['todos'] })
 
 			const posts = queryClient.getQueryData(['posts']) as Post[]
 			queryClient.setQueryData(['posts'], [...posts, newPost])
-
 
 			return { posts }
 		},
@@ -54,6 +47,12 @@ export default function AddPostModal({ user }: { user: User }) {
 		setDisabled(e.target.value === '')
 	}
 
+	const handleClick = () => {
+		if(whiteHovered) return
+
+		close()
+	}
+
 	const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		
@@ -64,22 +63,31 @@ export default function AddPostModal({ user }: { user: User }) {
 			body: data.body,
 			name: user?.name,
 			picture,
-			userId: user?.id
+			userId: user?.id,
+			likers: []
 		})
 	}
 
-	return <div onClick={handleClick} className="f-center inset-0 bg-dark/50 fixed z-40">
+	if(!isOpen) return null
+
+	return <div onClick={handleClick} className="black-inset">
 		<form onSubmit={handleSubmit} onMouseEnter={() => setWhiteHovered(true)} onMouseLeave={() => setWhiteHovered(false)} className="card w-[500px] h-[500px] flex flex-col">
 			<div className="v-center-bet m-3 mb-2 ml-1">
 				<p className="sub-label mt-[7px]">Add Post</p>
-				<HoverableIcon icon={CgClose} onClick={() => close()} size={22} />
+				<HoverableIcon icon={CgClose} onClick={isPending ? () => null : () => close()} size={22} />
 			</div>
-			<textarea value={data.body} onChange={handleChange}
+			<textarea disabled={isPending} maxLength={300} value={data.body} onChange={handleChange}
 				className="outline-none resize-none flex-1 w-full p-3 text-dark border-b-2 border-t-2 border-vio/15">
 			</textarea>
 			<div className="m-3 v-center-bet">
 				<HoverableIcon icon={IoImageOutline} onClick={() => {}} size={22} />
-				<button type="submit" disabled={disabled} className={`${disabled ? 'bg-vio/50' : 'bg-vio hover:bg-dvio transition-all duration-300'} font-bold text-white rounded-full py-2 px-6`}>Post</button>
+				<button type="submit" disabled={disabled || isPending}
+					className={`
+						${disabled || isPending ? 'bg-vio/50' : 'bg-vio hover:bg-dvio transition-all duration-300'}
+						font-bold text-white rounded-full py-2 px-6
+					`}>
+					Post
+				</button>
 			</div>
 		</form>
 	</div>

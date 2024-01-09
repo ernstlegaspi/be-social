@@ -1,3 +1,17 @@
+type TComment = {
+	id?: string
+	body: string
+	picture: string
+	name: string
+	createdAt?: Date
+	postId: string
+	userCommentFromId: string[]
+	userCommentToId: string[]
+	userId: string
+	likers: string[]
+	likedUserId?: string
+}
+
 type User = {
 	id: string
 	email: string
@@ -12,12 +26,13 @@ type User = {
 }
 
 type Post = {
+	comments?: TComment[]
 	createdAt?: Date
 	body: string
 	id?: string
 	interests: string[]
 	likers: string[]
-	likedUserId: string
+	likedUserId?: string
 	name: string
 	picture: string
 	userId: string

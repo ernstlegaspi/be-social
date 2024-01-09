@@ -15,6 +15,9 @@ export default async function getPostsPerInterests(userId: string, interests: st
 			},
 			orderBy: {
 				createdAt: 'desc'
+			},
+			include: {
+				comments: true
 			}
 		})
 

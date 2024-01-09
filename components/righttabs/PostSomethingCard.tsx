@@ -3,7 +3,7 @@
 import { IoImageOutline } from "react-icons/io5"
 
 import ProfilePicture from "../ProfilePicture"
-import useAddPostModal from "@/hooks/useAddPostModal"
+import { useAddPostModal } from "@/hooks/useToggleModal"
 import HoverableIcon from "../HoverableIcon"
 
 export default function PostSomethingCard({ picture }: { picture: string }) {
